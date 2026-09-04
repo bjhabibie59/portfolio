@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Retro Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #f4ebd0;
+            --bg-paper: #fffaf0;
+            --brown-dark: #3b2314;
+            --brown-mid: #6b4423;
+            --brown-light: #c29b61;
+            --accent-rust: #9e472a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier Prime', monospace;
+            background-color: var(--bg-cream);
+            color: var(--brown-dark);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo, .btn, .modal-title {
+            font-family: 'Special Elite', cursive;
+        }
+
+        /* Vintage paper texture overlay effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 60%, rgba(59, 35, 20, 0.15) 100%);
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--bg-paper);
+            border-bottom: 3px solid var(--brown-dark);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(59, 35, 20, 0.1);
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            color: var(--brown-dark);
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 2px dashed var(--brown-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--brown-dark);
+            font-weight: 700;
+            transition: color 0.2s, border-bottom 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-rust);
+            border-bottom: 2px solid var(--accent-rust);
+        }
+
+        /* Hero Section (Home) */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f4ebd0 0%, #e6d2b5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            border-bottom: 4px solid var(--brown-dark);
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--brown-dark);
+            text-shadow: 2px 2px var(--brown-light);
+            transform: scale(0.8);
+            opacity: 0;
+            animation: popUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.2s;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--brown-mid);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.4s;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            text-decoration: none;
+            border: 2px solid var(--brown-dark);
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--brown-light);
+            transition: all 0.2s ease;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.6s;
+        }
+
+        .btn:hover {
+            background: var(--accent-rust);
+            color: white;
+            box-shadow: 6px 6px 0px var(--brown-dark);
+            transform: translate(-2px, -2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 5%;
+            border-bottom: 3px dashed var(--brown-light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--brown-dark);
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px var(--brown-light);
+        }
+
+        .section-title p {
+            color: var(--brown-mid);
+            font-size: 1.2rem;
+        }
+
+        /* Scroll Reveal Base */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* About Section with Profile Photo */
+        #about {
+            background: var(--bg-paper);
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-frame {
+            background: var(--bg-cream);
+            border: 5px solid var(--brown-dark);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 8px 8px 0px var(--brown-light);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .profile-frame:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border: 3px solid var(--brown-dark);
+            filter: sepia(40%) contrast(110%);
+        }
+
+        .profile-caption {
+            margin-top: 1rem;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--brown-mid);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--brown-dark);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--brown-mid);
+            font-size: 1.15rem;
+        }
+
+        .skills-tag {
+            display: inline-block;
+            background: var(--brown-light);
+            color: var(--brown-dark);
+            padding: 0.3rem 0.8rem;
+            margin: 0.3rem;
+            font-size: 0.95rem;
+            border: 1px solid var(--brown-dark);
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: #eae0c8;
+        }
+
+        .contact-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--brown-dark);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            color: var(--brown-mid);
+        }
+
+        .contact-form {
+            background: var(--bg-paper);
+            padding: 2.5rem;
+            border: 4px solid var(--brown-dark);
+            box-shadow: 8px 8px 0px var(--brown-light);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: var(--brown-dark);
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--bg-cream);
+            border: 2px solid var(--brown-dark);
+            color: var(--brown-dark);
+            font-family: 'Courier Prime', monospace;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-rust);
+            background: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            border: 2px solid var(--brown-dark);
+            font-family: 'Special Elite', cursive;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--brown-light);
+            transition: all 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-rust);
+            color: white;
+            box-shadow: 6px 6px 0px var(--brown-dark);
+        }
+
+        /* Modal Pop-up */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(59, 35, 20, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: var(--bg-paper);
+            border: 4px solid var(--brown-dark);
+            padding: 2.5rem;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 10px 10px 0px var(--brown-light);
+            transform: scale(0.7);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--brown-dark);
+            margin-bottom: 1rem;
+        }
+
+        .modal-desc {
+            font-size: 1.1rem;
+            color: var(--brown-mid);
+            margin-bottom: 2rem;
+        }
+
+        .modal-close {
+            background: var(--brown-dark);
+            border: 2px solid var(--brown-dark);
+            color: var(--bg-cream);
+            padding: 0.7rem 1.5rem;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--brown-light);
+        }
+
+        .modal-close:hover {
+            background: var(--accent-rust);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            text-align: center;
+            padding: 2rem;
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        @keyframes popUp {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .about-container, .contact-container {
+                grid-template-columns: 1fr;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <a href="#" class="logo">Baharuddin Jusuf Habibie</a>
+        <ul class="nav-links">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section (Home) -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>HI!, Saya Baharuddin Jusuf Habibie</h1>
+            <p>Selamat datang di portofolio saya. Sebenarnya tidak ada hal penting yang perlu dilihat di sini.</p>
+            <button class="btn" onclick="openModal('SELAMAT DATANG', 'Terima kasih telah berkunjung ke portofolio saya. Sudah kubilang tidak ada yang menarik di sini.')">LIHAT PROFIL</button>
+        </div>
+    </section>
+
+    <!-- About Section with profile.jpeg -->
+    <section id="about" class="reveal">
+        <div class="section-title">
+            <h2>About Me</h2>
+            <p>Kenali profil dan keahlian profesional saya</p>
+        </div>
+        <div class="about-container">
+            <div class="profile-frame" onclick="openModal('FOTO PROFIL', 'Saya membuat website ini menggunakan AI dikarenakan saya tidak mempunyai skill dalam desain web hehe :D.')">
+                <img src="profile.jpeg" alt="Profile Photo" class="profile-img">
+                <div class="profile-caption">[ Arsip Foto Profil.jpeg ]</div>
+            </div>
+            <div class="about-text">
+                <h3>Junior Backend Developer</h3>
+                <p>Halo! Saya adalah seorang Junior Backend Developer yang berfokus pada pengembangan Backend.</p>
+                <p>Dengan pengalaman saya di bidang ini, saya berharap dapat berkontribusi dalam pengembangan sistem yang efisien dan skalabel.</p>
+                <div style="margin-top: 1.5rem;">
+                    <span class="skills-tag">Laravel</span>
+                    <span class="skills-tag">MySQL</span>
+                    <span class="skills-tag">API Development</span>
+                    <span class="skills-tag">Problem Solving</span>
+                    <span class="skills-tag">SOLID Principles</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="reveal">
+        <div class="section-title">
+            <h2>Contact Me</h2>
+            <p>Mari diskusikan project menarik berikutnya</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Informasi Kontak</h3>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <p>Bangkalan, Jawa Timur, Indonesia</p>
+                </div>
+                <div class="contact-item">
+                    <span>✉️</span>
+                    <p>habibieagain@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <span>📞</span>
+                    <p>+62 821 3212 5398</p>
+                </div>
+                <div class="contact-item">
+                    <span>⏱️</span>
+                    <p>Sesuai Mood saya :p</p>
+                </div>
+            </div>
+            <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="name">NAMA LENGKAP</label>
+                    <input type="text" id="name" placeholder="Masukkan nama Anda..." required>
+                </div>
+                <div class="form-group">
+                    <label for="email">ALAMAT EMAIL</label>
+                    <input type="email" id="email" placeholder="Masukkan email Anda..." required>
+                </div>
+                <div class="form-group">
+                    <label for="message">PESAN / PROYEK</label>
+                    <textarea id="message" placeholder="Tuliskan pesan Anda di sini..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">KIRIM PESAN</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Modal Pop-up -->
+    <div class="modal-overlay" id="customModal" onclick="closeModalOnOutside(event)">
+        <div class="modal-box">
+            <h3 class="modal-title" id="modalTitle">INFORMASI</h3>
+            <p class="modal-desc" id="modalDesc">Deskripsi pop-up.</p>
+            <button class="modal-close" onclick="closeModal()">TUTUP</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Portfolio. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Scroll Reveal Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Modal Functions
+        function openModal(title, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('customModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.remove('active');
+        }
+
+        function closeModalOnOutside(event) {
+            if(event.target === document.getElementById('customModal')) {
+                closeModal();
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            openModal('PESAN TERKIRIM', 'Praankkk!!!, Ini cuma sekadar alert pesan bohongan hehe :D.');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
