@@ -1,0 +1,110 @@
+<section id="about" class="reveal">
+    <div class="section-title">
+        <h2>About & Backend Portfolio</h2>
+        <p>Kenali profil, karya backend, dan uji terminal interaktif</p>
+    </div>
+
+    <!-- Profile Sub-section -->
+    <div class="about-container">
+        <div class="profile-frame" onclick="openModal('FOTO PROFIL', 'Saya membuat website ini menggunakan AI dikarenakan saya tidak mempunyai skill dalam desain web hehe :D.')">
+            <img src="assets/profile.jpeg" alt="Profile Photo" class="profile-img">
+            <div class="profile-caption">[ Aku Gwehj.jpeg ]</div>
+        </div>
+        <div class="about-text">
+            <h3>Junior Backend Developer</h3>
+            <p>Halo! Saya adalah seorang Junior Backend Developer yang berfokus pada pengembangan sistem backend dan RESTful API.</p>
+            <p>Dengan pengalaman di bidang ini, saya berharap dapat berkontribusi dalam pengembangan arsitektur sistem yang efisien, aman, dan skalabel.</p>
+            <div style="margin-top: 1.5rem;">
+                <span class="skills-tag">Laravel</span>
+                <span class="skills-tag">MySQL</span>
+                <span class="skills-tag">API Development</span>
+                <span class="skills-tag">SOLID Principles</span>
+                <span class="skills-tag">Git</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Sub-section -->
+    <div class="subsection-heading">Backend Projects</div>
+    <div class="projects-grid">
+        <div class="project-card">
+            <div>
+                <h4>Magnets API (Magang SMK)</h4>
+                <p>API backend untuk sistem magang anak SMK yang mencakup presensi, jurnal, pengisian laporan, serta sistem presensi RFID dalam radius tertentu (On Progress).</p>
+                <div class="arch-highlight">Arch: Service Layer & Geofencing Radius Validation</div>
+                <div style="margin-bottom: 1rem;">
+                    <span class="skills-tag">Laravel</span>
+                    <span class="skills-tag">MySQL</span>
+                    <span class="skills-tag">RFID & Geofencing</span>
+                </div>
+            </div>
+            <div>
+                <div class="project-links" style="margin-bottom: 0.5rem;">
+                    <a href="https://github.com/bjhabibie59/magnets-api" target="_blank" class="project-btn">GitHub</a>
+                    <button onclick="toggleApiResponse('json-magnets')" class="project-btn" style="cursor: pointer;">Test API</button>
+                </div>
+                <div id="json-magnets" class="api-response-box">{
+  "status": "success",
+  "code": 200,
+  "endpoint": "/api/v1/attendance/rfid",
+  "data": {
+    "student_id": "SMK-2026-042",
+    "location_status": "Inside Radius (<= 50m)",
+    "rfid_scanned": true,
+    "timestamp": "2026-03-30 08:15:20"
+  }
+}</div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div>
+                <h4>Task Management API</h4>
+                <p>API pengelolaan tugas (Task Management) yang dirancang secara profesional dengan menerapkan SOLID Principles secara ketat (On Progress).</p>
+                <div class="arch-highlight">Arch: SOLID Principles & Repository Pattern</div>
+                <div style="margin-bottom: 1rem;">
+                    <span class="skills-tag">Laravel</span>
+                    <span class="skills-tag">SOLID Principles</span>
+                    <span class="skills-tag">Clean Code</span>
+                </div>
+            </div>
+            <div>
+                <div class="project-links" style="margin-bottom: 0.5rem;">
+                    <a href="https://github.com/bjhabibie59/task-management" target="_blank" class="project-btn">GitHub</a>
+                    <button onclick="toggleApiResponse('json-task')" class="project-btn" style="cursor: pointer;">Test API</button>
+                </div>
+                <div id="json-task" class="api-response-box">{
+  "status": "success",
+  "code": 201,
+  "endpoint": "/api/v1/tasks",
+  "architecture": "SOLID & Repository Pattern",
+  "data": {
+    "task_id": 108,
+    "title": "Implement Dependency Injection",
+    "status": "In Progress"
+  }
+}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terminal Sub-section -->
+    <div class="subsection-heading">Interactive CLI Terminal</div>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-dot dot-red"></div>
+            <div class="terminal-dot dot-yellow"></div>
+            <div class="terminal-dot dot-green"></div>
+            <div class="terminal-title">habibie@portfolio-cli:~</div>
+        </div>
+        <div class="terminal-body" id="terminalOutput">
+            <div>Selamat datang di Retro Terminal v1.0.0.</div>
+            <div>Ketik <span style="color: #ffbd2e;">help</span> untuk melihat daftar perintah yang tersedia.</div>
+            <br>
+        </div>
+        <div class="terminal-input-line" style="padding: 0 1.5rem 1.5rem 1.5rem;">
+            <span class="terminal-prompt">guest@habibie:~#</span>
+            <input type="text" id="terminalInput" class="terminal-input" placeholder="ketik perintah di sini..." onkeydown="handleTerminalInput(event)">
+        </div>
+    </div>
+</section>
