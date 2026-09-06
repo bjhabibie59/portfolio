@@ -182,7 +182,7 @@ function handleTerminalInput(event) {
     terminalOutput.appendChild(promptLine);
 
     if (cmd === 'clear') {
-        terminalOutput.innerHTML = '<div>[System Boot] Selamat datang di Terminal Milik Habibie (Divisi Website Development - UKM Triple-C UTM).</div><div>Ketik <span style="color: #ffbd2e;">help</span> untuk melihat daftar perintah. #SalamCreative #SemangatCreative</div><br>';
+        terminalOutput.innerHTML = '<div>[System Boot] Selamat datang di Terminal Milik Habibie.</div><div>Ketik <span style="color: #ffbd2e;">help</span> untuk melihat daftar perintah.</div><br>';
     } else if (commandsInfo[cmd]) {
         const respLine = document.createElement('div');
         respLine.style.color = '#ffffff';
