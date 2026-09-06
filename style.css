@@ -83,10 +83,13 @@ nav {
 }
 
 .logo {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: var(--brown-dark);
     text-decoration: none;
     font-weight: bold;
+}
+
+.logo-text {
     border-bottom: 2px dashed var(--brown-dark);
 }
 
@@ -673,6 +676,9 @@ body.hacker-mode nav {
 
 body.hacker-mode .logo {
     color: #00ff66;
+}
+
+body.hacker-mode .logo-text {
     border-bottom: 2px dashed #00ff66;
 }
 
@@ -764,6 +770,15 @@ body.hacker-mode footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .logo {
+        gap: 4px;
+    }
+    .logo img {
+        height: 26px !important;
+    }
+    .logo-text {
+        font-size: 0.8rem;
+    }
     .menu-toggle {
         display: block;
     }

@@ -130,16 +130,40 @@ function handleFormSubmit(event) {
 
 // Terminal Interactive Logic
 const commandsInfo = {
-    'help': 'Perintah tersedia:\n - help: Menampilkan bantuan\n - about: Info singkat tentang saya\n - projects: Daftar proyek backend\n - skills: Keahlian utama\n - contact: Info kontak & email\n - ukm / join: Status pendaftaran UKM\n - whoami: Identitas sesi saat ini\n - ping: Check status server tiruan\n - clear: Membersihkan layar terminal',
-    'about': 'Baharuddin Jusuf Habibie - Junior Backend Developer yang fokus pada Laravel, MySQL & API Development.',
+    'help': 'Perintah tersedia:\n - help: Menampilkan bantuan\n - about: Info singkat tentang saya\n - projects: Daftar proyek web/backend\n - skills: Keahlian utama\n - contact: Info kontak & email\n - ukm / join: Status pendaftaran UKM\n - jack: Info maskot Jack\n - utm: Info Universitas Trunojoyo Madura\n - triplec: Info UKM Triple-C\n - whoami: Identitas sesi saat ini\n - ping: Check status server tiruan\n - clear: Membersihkan layar terminal',
+    'about': 'Baharuddin Jusuf Habibie - Junior Backend Developer.',
     'projects': '1. Magnets API (Magang SMK - Presensi RFID & Geofencing)\n2. Task Management API (SOLID Principles & Repository Pattern)',
     'skills': 'Laravel, MySQL, API Development, Problem Solving, SOLID Principles, Git',
     'contact': 'Email: habibieagain@gmail.com | Lokasi: Bangkalan, Jawa Timur',
-    'ukm': '[SUCCESS] Status: Pendaftar UKM siap bergabung!\nKeahlian: Laravel & Backend Architecture.\nPesan untuk Mentor: "Mohon diterima kak, dijamin server aman dan gak bikin down :D"',
-    'join': '[SUCCESS] Status: Pendaftar UKM siap bergabung!\nKeahlian: Laravel & Backend Architecture.\nPesan untuk Mentor: "Mohon diterima kak, dijamin server aman dan gak bikin down :D"',
+    'ukm': '[SUCCESS] Status: Pendaftar Divisi Website Development siap bergabung!\nKeahlian: Laravel & Web Architecture.\nPesan untuk Mentor: "Mohon diterima kak, siap berproses dan berkarya bersama #SalamCreative #SemangatCreative!"',
+    'join': '[SUCCESS] Status: Pendaftar Divisi Website Development siap bergabung!\nKeahlian: Laravel & Web Architecture.\nPesan untuk Mentor: "Mohon diterima kak, siap berproses dan berkarya bersama #SalamCreative #SemangatCreative!"',
+    'jack': 'Jack adalah maskot resmi UKM Creative Computer Club (Triple-C) UTM. Wadah belajar teknologi & kreatif digital sejak 1999! #SalamCreative #SemangatCreative',
+    'utm': 'Universitas Trunojoyo Madura (UTM) - Kampus negeri di Bangkalan, Madura.',
+    'triplec': 'UKM Creative Computer Club (Triple-C) UTM (Est. 1999):\nUnit kegiatan mahasiswa di bidang teknologi & kreatif digital.\nMencakup: Web Dev, Desain Grafis, Fotografi, Videografi, UI/UX, hingga Writing Skill.\n#SalamCreative #SemangatCreative',
     'whoami': 'guest@habibie-portfolio-user',
     'ping': 'PONG! Latency: 12ms. Database connection: OK.'
 };
+
+let currentJackIndex = 1;
+function rotateJackMascot() {
+    currentJackIndex = currentJackIndex >= 3 ? 1 : currentJackIndex + 1;
+    const imgEl = document.getElementById('jackMascotImg');
+    const quotes = {
+        1: "Halo! Saya Jack 1 dari UKM Creative Computer Club (Triple-C) UTM (Est. 1999). Di Triple-C kita belajar Web Dev, Desain, Fotografi, Videografi, UI/UX, hingga Writing lho!",
+        2: "Saya Jack 2! Kandidat Baharuddin Jusuf Habibie ini mendaftar di Divisi Website Development (spesialisasi Laravel & SOLID), siap berkolaborasi dengan divisi kreatif lainnya di Triple-C!",
+        3: "Saya Jack 3! Semangat belajar dan berorganisasi bersama keluarga besar Triple-C. #SalamCreative #SemangatCreative! Loloskan Habibie di KC Website yaa, Hehe :D"
+    };
+    if (imgEl) {
+        if (currentJackIndex === 1) {
+            imgEl.src = "assets/tripleC/Salinan Jack 1 (1).png";
+        } else if (currentJackIndex === 2) {
+            imgEl.src = "assets/tripleC/Salinan Jack 2 (1).png";
+        } else {
+            imgEl.src = "assets/tripleC/Salinan Jack 3.png";
+        }
+    }
+    openModal(`MASKOT JACK ${currentJackIndex} (TRIPLE-C)`, quotes[currentJackIndex]);
+}
 
 function handleTerminalInput(event) {
     // Only execute on Enter key
@@ -158,7 +182,7 @@ function handleTerminalInput(event) {
     terminalOutput.appendChild(promptLine);
 
     if (cmd === 'clear') {
-        terminalOutput.innerHTML = '<div>Selamat datang di Retro Terminal v1.0.0. Ketik <span style="color: #ffbd2e;">help</span> untuk melihat daftar perintah.</div><br>';
+        terminalOutput.innerHTML = '<div>[System Boot] Selamat datang di Terminal Milik Habibie (Divisi Website Development - UKM Triple-C UTM).</div><div>Ketik <span style="color: #ffbd2e;">help</span> untuk melihat daftar perintah. #SalamCreative #SemangatCreative</div><br>';
     } else if (commandsInfo[cmd]) {
         const respLine = document.createElement('div');
         respLine.style.color = '#ffffff';

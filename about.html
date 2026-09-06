@@ -1,14 +1,21 @@
 <section id="about" class="reveal">
     <div class="section-title">
         <h2>About & Backend Portfolio</h2>
-        <p>Kenali profil, karya backend, dan uji terminal interaktif</p>
+        <p>Ingin mengenal saya lebih jauh? Lihat profil dan proyek backend saya di bawah ini.</p>
     </div>
 
     <!-- Profile Sub-section -->
     <div class="about-container">
-        <div class="profile-frame" onclick="openModal('FOTO PROFIL', 'Saya membuat website ini menggunakan AI dikarenakan saya tidak mempunyai skill dalam desain web hehe :D.')">
-            <img src="assets/profile.jpeg" alt="Profile Photo" class="profile-img">
-            <div class="profile-caption">[ Aku Gwehj.jpeg ]</div>
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
+            <div class="profile-frame" onclick="openModal('FOTO PROFIL', 'Saya membuat website ini menggunakan AI dikarenakan saya tidak mempunyai skill dalam desain web hehe :D.')">
+                <img src="assets/profile.jpeg" alt="Profile Photo" class="profile-img">
+                <div class="profile-caption">[ Aku Gwehj.jpeg ]</div>
+            </div>
+            <!-- Mascot Jack Card -->
+            <div class="profile-frame" style="cursor: pointer; padding: 0.5rem; background: var(--bg-paper); text-align: center;" onclick="rotateJackMascot()">
+                <img id="jackMascotImg" src="assets/tripleC/Salinan Jack 1 (1).png" alt="Mascot Jack" style="max-height: 120px; width: auto; object-fit: contain; border: 2px solid var(--brown-dark);">
+                <div class="profile-caption" style="margin-top: 5px;">[ Jack.png — Klik Ganti Pose ]</div>
+            </div>
         </div>
         <div class="about-text">
             <h3>Junior Backend Developer</h3>
@@ -89,7 +96,7 @@
     </div>
 
     <!-- Terminal Sub-section -->
-    <div class="subsection-heading">Interactive CLI Terminal</div>
+    <div class="subsection-heading">CLI Terminal</div>
     <div class="terminal-container">
         <div class="terminal-header">
             <div class="terminal-dot dot-red"></div>
@@ -98,8 +105,8 @@
             <div class="terminal-title">habibie@portfolio-cli:~</div>
         </div>
         <div class="terminal-body" id="terminalOutput">
-            <div>Selamat datang di Retro Terminal v1.0.0.</div>
-            <div>Ketik <span style="color: #ffbd2e;">help</span> untuk melihat daftar perintah yang tersedia.</div>
+            <div>[System Boot] Selamat datang di Habibie Terminal (Divisi Website Development - UKM Triple-C UTM).</div>
+            <div>Ketik <span style="color: #ffbd2e;">help</span> untuk melihat daftar perintah. #SalamCreative #SemangatCreative</div>
             <br>
         </div>
         <div class="terminal-input-line" style="padding: 0 1.5rem 1.5rem 1.5rem;">
