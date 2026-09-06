@@ -49,5 +49,3 @@ Proyek ini memisahkan komponen dan logika ke dalam beberapa file terpisah agar m
 ## 🛠️ Cara Menjalankan
 1. Pastikan Anda memiliki browser modern (Chrome, Firefox, Edge, dll.).
 2. Buka file `index.html` langsung di browser atau jalankan menggunakan **Live Server** di VS Code.
-
-#SalamCreative #SemangatCreative
